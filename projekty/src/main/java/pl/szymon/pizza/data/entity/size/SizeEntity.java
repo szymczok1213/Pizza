@@ -2,6 +2,9 @@ package pl.szymon.pizza.data.entity.size;
 
 
 import nonapi.io.github.classgraph.json.Id;
+import org.hibernate.mapping.Set;
+import pl.szymon.pizza.data.entity.orders_sizes.Orders_sizesEntity;
+import pl.szymon.pizza.data.entity.pizza.PizzaEntity;
 import pl.szymon.pizza.domain.model.SizeType;
 
 import javax.persistence.*;
@@ -23,6 +26,13 @@ public class SizeEntity {
 
     @Column(name="pizza_id")
     private Integer pizzaId;
+    
+    @ManyToOne
+    @JoinColumn(name="pizza_id", insertable = false, updatable=false)
+    private PizzaEntity pizza;
+
+    @OneToMany(mappedBy = "size")
+    private Set<Orders_sizesEntity> orderSize;
 
 
 }

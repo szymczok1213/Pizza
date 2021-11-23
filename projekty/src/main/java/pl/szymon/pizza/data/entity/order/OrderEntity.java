@@ -1,11 +1,13 @@
 package pl.szymon.pizza.data.entity.order;
 
 import nonapi.io.github.classgraph.json.Id;
+import pl.szymon.pizza.data.entity.orders_sizes.Orders_sizesEntity;
 import pl.szymon.pizza.domain.model.SizeType;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "orders")
@@ -42,4 +44,8 @@ public class OrderEntity {
 
     @Column(name = "token")
     private String token;
+
+    //1 zamowienie moze miec wiele sizow
+    @OneToMany(mappedBy = "order")
+    private Set<Orders_sizesEntity> orderSize;
 }

@@ -2,12 +2,13 @@ package pl.szymon.pizza.data.entity.orders_sizes;
 
 
 import nonapi.io.github.classgraph.json.Id;
+import pl.szymon.pizza.data.entity.order.OrderEntity;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "orders_sizes")
-public class Orders_sizesEntity {
+public class Orders_sizesEntity<SizeEntity> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +24,11 @@ public class Orders_sizesEntity {
     @Column(name = "size_count")
     private Integer size_count;
 
+    @ManyToOne
+    @JoinColumn(name="order_id", insertable = false, updatable=false)
+    private OrderEntity order;
+
+    @ManyToOne
+    @JoinColumn(name="size_id", insertable = false, updatable=false)
+    private SizeEntity size;
 }
